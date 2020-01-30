@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,9 @@ object CloudflowSparkLibraryPlugin extends AutoPlugin {
       "com.lightbend.cloudflow" %% "cloudflow-spark" % BuildInfo.version,
       "com.lightbend.cloudflow" %% "cloudflow-spark-testkit" % BuildInfo.version % "test"
     ),
-
+    // FIX for making sure these libraries do not get evicted, since that makes spark fail.
+    dependencyOverrides += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.9",
+    dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.9",
     javaOptions in com.typesafe.sbt.packager.universal.UniversalPlugin.autoImport.Universal ++= Seq( // this is for local experimentation - do not remove
     // -J params will be added as jvm parameters
     // "-J-Xmx1536m",

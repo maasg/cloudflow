@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -198,7 +198,6 @@ trait StreamletDescriptorBuilder extends EitherValues with OptionValues {
       runtime: String
   ): StreamletDescriptor = {
     StreamletDescriptor(
-      projectId = "prj",
       className = className,
       runtime = StreamletRuntimeDescriptor(runtime),
       labels = Vector.empty,
@@ -207,13 +206,11 @@ trait StreamletDescriptorBuilder extends EitherValues with OptionValues {
       outlets = Vector.empty,
       configParameters = Vector.empty,
       attributes = Vector.empty,
-      image = "image",
       volumeMounts = Vector.empty
     )
   }
 
   def buildStreamletDescriptor(
-      projectId: String,
       className: String,
       runtime: StreamletRuntimeDescriptor,
       labels: Vector[String],
@@ -222,11 +219,9 @@ trait StreamletDescriptorBuilder extends EitherValues with OptionValues {
       outlets: Vector[OutletDescriptor],
       configParameters: Vector[ConfigParameterDescriptor],
       attributes: Vector[StreamletAttributeDescriptor],
-      image: String,
       volumeMounts: Vector[VolumeMountDescriptor]
   ): StreamletDescriptor = {
     StreamletDescriptor(
-      projectId = projectId,
       className = className,
       runtime = runtime,
       labels = labels,
@@ -235,7 +230,6 @@ trait StreamletDescriptorBuilder extends EitherValues with OptionValues {
       outlets = outlets,
       configParameters = configParameters,
       attributes = attributes,
-      image = image,
       volumeMounts = volumeMounts
     )
   }
@@ -247,7 +241,6 @@ trait StreamletDescriptorBuilder extends EitherValues with OptionValues {
       className: String
   ): StreamletDescriptor = {
     StreamletDescriptor(
-      projectId = "prj",
       className = className,
       runtime = StreamletRuntimeDescriptor("akka"),
       labels = Vector.empty,
@@ -256,7 +249,6 @@ trait StreamletDescriptorBuilder extends EitherValues with OptionValues {
       outlets = Vector.empty,
       configParameters = Vector.empty,
       attributes = Vector.empty,
-      image = "image",
       volumeMounts = Vector.empty
     )
   }

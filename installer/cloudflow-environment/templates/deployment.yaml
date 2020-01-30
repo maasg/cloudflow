@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+# Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -55,9 +55,6 @@ spec:
             # Configure the JVM to behave itself when run in a Docker container
             - name: JAVA_OPTS
               value: {{ .Values.operator.jvm.opts }}
-            # Cluster type
-            - name: CLUSTER_TYPE
-              value: {{ required "Cluster type cannot be empty" .Values.operator.clusterType }}
             - name: KAFKA_BOOTSTRAP_SERVERS
               value: "{{ required "Kafka bootstrap servers cannot be empty" .Values.kafka.bootstrapServers }}"
             # Configure Strimzi details

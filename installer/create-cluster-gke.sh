@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+# Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
 # limitations under the License.
 
 # Usage:
-# gke-create-cluster.sh [CLUSTER-NAME]
+# create-cluster-gke.sh [CLUSTER-NAME]
 if [ $# -eq 0 ]
   then
     echo "No cluster name supplied"
-    echo "Usage: gke-create-cluster.sh [CLUSTER-NAME]"
+    echo "Usage: create-cluster-gke.sh [CLUSTER-NAME]"
     exit 1
 fi
 
@@ -65,7 +65,8 @@ gcloud beta container node-pools create kafka-pool-0 \
   --cluster=$CLUSTER_NAME \
   --machine-type n1-highmem-2  \
   --node-labels=dedicated=StrimziKafka \
-  --node-taints=dedicated=StrimziKafka:NoSchedule
+  --node-taints=dedicated=StrimziKafka:NoSchedule \
+  --no-enable-autoupgrade
 
 ## Wait for clusters to come up
 echo "Waiting for cluster to become stable before continuing with the installation....."

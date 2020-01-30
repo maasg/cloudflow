@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ package testkit {
     def portName: String
 
     // This is for internal usage so using a scaladsl Source and a Tuple is no problem
-    private[testkit] def source: Source[(T, CommittableOffset), NotUsed]
+    private[testkit] def source: Source[(T, Committable), NotUsed]
   }
 
   trait OutletTap[T] {

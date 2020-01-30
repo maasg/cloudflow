@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ object StreamletDescriptor {
 }
 
 final case class StreamletDescriptor(
-    projectId: String,
     className: String,
     runtime: StreamletRuntimeDescriptor,
     labels: immutable.IndexedSeq[String],
@@ -32,7 +31,6 @@ final case class StreamletDescriptor(
     outlets: immutable.IndexedSeq[OutletDescriptor],
     configParameters: immutable.IndexedSeq[ConfigParameterDescriptor],
     attributes: immutable.IndexedSeq[StreamletAttributeDescriptor] = Vector.empty,
-    image: String,
     volumeMounts: immutable.IndexedSeq[VolumeMountDescriptor]
 ) {
   def isIngress: Boolean = inlets.isEmpty && outlets.nonEmpty

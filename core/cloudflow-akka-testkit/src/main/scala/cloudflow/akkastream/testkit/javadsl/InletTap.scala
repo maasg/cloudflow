@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import cloudflow.akkastream.testkit._
 
 // The use of Tuple here is OK since the creation of the tuple is handled
 // internally by the AkkaStreamletTestKit when creating instances of this class
-case class SourceInletTap[T] private[testkit] (inlet: CodecInlet[T], src: akka.stream.javadsl.Source[(T, CommittableOffset), NotUsed]) extends InletTap[T] {
+case class SourceInletTap[T] private[testkit] (inlet: CodecInlet[T], src: akka.stream.javadsl.Source[(T, Committable), NotUsed]) extends InletTap[T] {
   val portName = inlet.name
 
   private[testkit] val source = src.asScala

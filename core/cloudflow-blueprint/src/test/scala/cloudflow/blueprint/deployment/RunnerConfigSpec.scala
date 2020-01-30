@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,6 +106,7 @@ class RunnerConfigSpec extends WordSpec with MustMatchers with OptionValues with
 
   val appId = "monstrous-mite-12345"
   val appVersion = "42-abcdef0"
+  val image = "image-1"
 
   val agentPaths = Map(ApplicationDescriptor.PrometheusAgentKey -> "/app/prometheus/prometheus.jar")
   val kafkaBootstrapServers = "kafka-0.broker.kafka.svc.cluster.local:9092,kafka-1.broker.kafka.svc.cluster.local:9092,kafka-2.broker.kafka.svc.cluster.local:9092"
@@ -123,7 +124,7 @@ class RunnerConfigSpec extends WordSpec with MustMatchers with OptionValues with
     .connect(ingressRef.out, processorRef.in)
 
   val verifiedBlueprint = blueprint.verified.right.get
-  val descriptor = ApplicationDescriptor(appId, appVersion, verifiedBlueprint, agentPaths)
+  val descriptor = ApplicationDescriptor(appId, appVersion, image, verifiedBlueprint, agentPaths)
 
   val allDeployments = descriptor.deployments
   val ingressDeployment = allDeployments.find(_.streamletName == ingressRef.name).value

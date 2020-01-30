@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+# Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-tags:
-  targetGke: true
-  targetMinikube: false
-  targetMinishift: false
-
-
 kafka:
   strimzi:
     useDedicatedNodes: true
     kafka:
-     persistentVolumeClaimSize: 100Gi
-     resources:
+      persistentVolumeClaimSize: 100Gi
+      resources:
         requests:
           memory: "5Gi"
         limits:
@@ -36,9 +30,7 @@ kafka:
         limits:
           memory: "3Gi"
 
-
 operator:
-  clusterType: "gke"
   akkaRunner:
     requestsMemory: "128M"
     requestsCpu: "0.5"

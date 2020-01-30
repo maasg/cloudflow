@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,12 +31,13 @@ import scala.concurrent._
 import scala.util._
 
 object Operator {
-  val ProtocolVersionNamespace = "cloudflow"
   val ProtocolVersion = "1"
   val ProtocolVersionKey = "protocol-version"
   val ProtocolVersionConfigMapName = "cloudflow-protocol-version"
   val ProtocolVersionConfigMap = ConfigMap(
-    metadata = ObjectMeta(name = ProtocolVersionConfigMapName),
+    metadata = ObjectMeta(
+      name = ProtocolVersionConfigMapName,
+      labels = Map(ProtocolVersionConfigMapName -> ProtocolVersionConfigMapName)),
     data = Map(ProtocolVersionKey -> ProtocolVersion)
   )
 

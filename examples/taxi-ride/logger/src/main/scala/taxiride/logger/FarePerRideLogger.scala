@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ class FarePerRideLogger extends AkkaStreamlet {
     }
 
     def flow = {
-      FlowWithOffsetContext[TaxiRideFare]
+      FlowWithCommittableContext[TaxiRideFare]
         .map { taxiRideFare ⇒
           log(taxiRideFare)
           taxiRideFare
@@ -65,6 +65,6 @@ class FarePerRideLogger extends AkkaStreamlet {
     def runnableGraph =
       sourceWithOffsetContext(inlet)
         .via(flow)
-        .to(sinkWithOffsetContext)
+        .to(committableSink)
   }
 }

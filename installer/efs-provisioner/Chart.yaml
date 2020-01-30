@@ -1,4 +1,4 @@
-# Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+# Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,7 @@
 # limitations under the License.
 
 
-image:
-  repository: alpine
-  tag: 3.3
-  pullPolicy: IfNotPresent
-
-restartPolicy: Never
+apiVersion: v1
+name: efs-provisioner
+description: A Helm chart for the AWS EFS external storage provisioner
+version: 1.0.0

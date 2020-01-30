@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,9 @@ package cloudflow.akkastream.util.javadsl;
 import java.util.ArrayList;
 import java.util.List;
 
+import akka.stream.javadsl.RunnableGraph;
 import cloudflow.akkastream.AkkaStreamlet;
+import cloudflow.akkastream.javadsl.RunnableGraphStreamletLogic;
 import cloudflow.akkastream.testdata.Data;
 import cloudflow.streamlets.CodecInlet;
 import cloudflow.streamlets.StreamletShape;
@@ -45,11 +47,12 @@ public class MergeTest extends JUnitSuite {
         public StreamletShape shape() {
          return StreamletShape.createWithInlets(inlet1, inlet2).withOutlets(outlet);
         }
-        public MergeLogic createLogic() {
-          List<CodecInlet<Data>> inlets = new ArrayList<CodecInlet<Data>>();
-          inlets.add(inlet1);
-          inlets.add(inlet2);
-          return new MergeLogic(inlets, outlet, getContext());
+        public RunnableGraphStreamletLogic createLogic() {
+          return new RunnableGraphStreamletLogic(getContext()) {
+            public RunnableGraph createRunnableGraph() {
+              return Merger.source(getContext(), inlet1, inlet2).to(getCommittableSink(outlet));
+            }
+          };
         }
     }
 }

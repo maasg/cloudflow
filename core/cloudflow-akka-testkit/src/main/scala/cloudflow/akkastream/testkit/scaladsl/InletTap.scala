@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import akka.stream.scaladsl._
 import cloudflow.streamlets._
 import cloudflow.akkastream.testkit._
 
-case class SourceInletTap[T](inlet: CodecInlet[T], source: Source[(T, CommittableOffset), NotUsed]) extends InletTap[T] {
+case class SourceInletTap[T](inlet: CodecInlet[T], source: Source[(T, Committable), NotUsed]) extends InletTap[T] {
   def portName = inlet.name
 }
 

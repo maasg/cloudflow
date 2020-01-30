@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+# Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,32 +32,12 @@ set +x
 # shellcheck source=common/detect.sh
 . "$currentDirectory"/detect.sh
 
-# Tiller check
-. "$currentDirectory"/tiller.sh
-
 # Utils
 . "$currentDirectory"/utils.sh
 
-export_tiller_namespace
-if [ $? -ne 0 ]; then
-    print_error_message "Cannot detect the namespace that Tiller is installed in."
-    print_error_message ""
-    print_error_message "This can be caused by:"
-    print_error_message "1. Tiller has not yet been installed."
-    print_error_message "2. The cluster is new and all components have not yet started."
-    print_error_message ""
-    print_error_message "Please check if helm is correctly installed using `helm version`."
-    print_error_message "If the connection times out the cluster is still undergoing setup."
-    print_error_message "In that case please wait a few minutes before trying again."
-    print_error_message ""
-    exit 1
-fi
-echo "The tiller namespace is '$TILLER_NAMESPACE'"
-
-
 # Cloudflow operator version
 export operatorImageName="lightbend/cloudflow-operator"
-export operatorImageTag="1.3.0"
+export operatorImageTag="89-f8a4ddc"
 export operatorImage="$operatorImageName:$operatorImageTag"
 
 
@@ -66,7 +46,7 @@ export KAFKA="${KAFKA:-CloudflowManaged}"
 
 # Flink
 export flinkReleaseName="cloudflow-flink"
-export flinkOperatorChartVersion="0.6.0"
+export flinkOperatorChartVersion="0.8.0"
 export flinkOperatorNamespace=""
 export installFlinkOperator=false
 
@@ -199,7 +179,7 @@ elif [ "${KAFKA}" = "External" ]; then
 else
     print_error_message "Invalid Kafka installation mode defined: '${KAFKA}'."
     print_error_message ""
-    
+
     exit 1
 fi
 
@@ -229,11 +209,23 @@ install_nfs_server() {
 helm upgrade $NFS_SERVER_NAME lightbend-helm-charts/$NFS_CHART_NAME \
 --install \
 --namespace "$1" \
---timeout 600 \
+--timeout $HELM_TIMEOUT \
 --set createStorage=false \
 --set serviceAccount.create=false \
 --set serviceAccount.name=cloudflow-operator \
 --set onOpenShift="$2" \
 --set storageClassName=nfs-client \
 --version 0.2.0
+}
+
+EFS_SERVER_NAME=cloudflow-efs
+EFS_CHART_NAME=efs-provisioner
+install_efs_provisioner() {
+helm upgrade $EFS_SERVER_NAME stable/$EFS_CHART_NAME \
+--install \
+--namespace "$1" \
+--timeout 600 \
+--set efsProvisioner.dnsName="$2.efs.$3.amazonaws.com" \
+--set efsProvisioner.efsFileSystemId="$2" \
+--set efsProvisioner.awsRegion="$3"
 }

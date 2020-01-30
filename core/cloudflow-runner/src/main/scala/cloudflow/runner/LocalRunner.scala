@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+ * Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,7 +117,7 @@ object LocalRunner extends StreamletLoader {
         // Make sure that we convert any backslash in the path to a forward slash since we want to store this in a JSON value
         val localStorageDirectory = Files.createTempDirectory(s"local-runner-storage-${streamletName}").toFile.getAbsolutePath.replace('\\', '/')
         log.info(s"Using local storage directory: $localStorageDirectory")
-        val deployment: StreamletDeployment = StreamletDeployment(appDescriptor.appId, streamletDescriptor, idx, appDescriptor.connections)
+        val deployment: StreamletDeployment = StreamletDeployment(appDescriptor.appId, streamletDescriptor, "", idx, appDescriptor.connections)
         val runnerConfigObj = RunnerConfig(appId, appVersion, deployment, "localhost:" + kafkaPort)
         val runnerConfig = addStorageConfig(ConfigFactory.parseString(runnerConfigObj.data), localStorageDirectory)
         val streamletParamConfig = streamletParameterConfig.atPath("cloudflow.streamlets")

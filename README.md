@@ -1,6 +1,9 @@
 [![Join the chat at https://gitter.im/lightbend/cloudflow](https://badges.gitter.im/lightbend/cloudflow.svg)](https://gitter.im/lightbend/cloudflow?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+&nbsp;
+![Build status](https://github.com/lightbend/cloudflow/workflows/Build%20and%20Test/badge.svg?branch=master)
+
 <p>
-<img src="./docs/images/logo.svg" width="300">
+<img src="logo.svg" width="300">
 </p>
 Cloudflow enables users to quickly develop, orchestrate, and operate distributed streaming applications on Kubernetes.
 Cloudflow allows you to easily break down your streaming application to smaller composable components and wire them together with schema-based contracts.
@@ -12,7 +15,7 @@ With its powerful abstractions, Cloudflow allows to define, build and deploy the
 - Deploy: We provide Kubernetes tooling to deploy your distributed system with a single command, and manage durable connections between processing stages.
 - Operate: With a Lightbend subscription, you get all the tools you need to provide insights, observability, and lifecycle management for evolving your distributed streaming application.
 
-As data pipelines become first-class citizens in microservices architectures, Cloudflow gives developers data-optimized programming abstractions and run-time tooling for Kubernetes. 
+As data pipelines become first-class citizens in microservices architectures, Cloudflow gives developers data-optimized programming abstractions and run-time tooling for Kubernetes.
 In a nutshell, Cloudflow is an application development toolkit comprising:
 
 - An API definition for `Streamlet`, the core abstraction in Cloudflow.
@@ -21,7 +24,7 @@ In a nutshell, Cloudflow is an application development toolkit comprising:
 - A sandbox execution mode that accelerates the development and testing of your applications.
 - A set of `sbt` plugins that are able to package your application into a deployable container.
 - The Cloudflow operator, a Kubernetes operator that manages the application lifecycle on Kubernetes.
-- A CLI, in the form of a `kubectl` plugin, that facilitates manual and scripted management of the application.  
+- A CLI, in the form of a `kubectl` plugin, that facilitates manual and scripted management of the application.
 
 The different parts of Cloudflow work in unison to dramatically accelerate your application development efforts, reducing the time required to create, package, and deploy an application from weeks to hours.
 
@@ -29,8 +32,6 @@ The different parts of Cloudflow work in unison to dramatically accelerate your 
 ## Basic Concepts
 
 <p>
-<img src="./docs/images/apps.png" width="600">
-
 <i>Basic components of a Cloudflow Application</i>
 </p>
 
@@ -57,7 +58,7 @@ Your code is written in your familiar Structured Streaming, Flink, or Akka Strea
 
 Applications are deployed as a whole. Cloudflow takes care of deploying the individual `streamlets` and making sure connections get translated into data flowing between them at runtime.
 
-Learn more about the Cloudflow building blocks in our [Cloudflow Core Concepts](./docs/Cloudflow-Concepts.md)
+Learn more about the Cloudflow building blocks in our [Cloudflow Core Concepts](https://cloudflow.io/docs/current/concepts.html).
 
 ## The Drivers Behind Cloudflow
 
@@ -78,7 +79,7 @@ Cloudflow aims to make this easier by integrating the most popular streaming fra
 
 ---
 ## Where to Go Next?
-
+* [Understanding Streaming Data Applications with Cloudflow](https://cloudflow.io/docs/current/streaming-apps-with-cloudflow.html)
 * [Getting Started with Cloudflow](https://cloudflow.io/docs/current/get-started/index.html)
 * [Developing Applications with Cloudflow](https://cloudflow.io/docs/current/develop/cloudflow-streamlets.html)
 * [Setup Cloudflow on a Kubernetes Cluster](./installer/README.md)

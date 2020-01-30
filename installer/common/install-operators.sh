@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copyright (C) 2016-2019 Lightbend Inc. <https://www.lightbend.com>
+# Copyright (C) 2016-2020 Lightbend Inc. <https://www.lightbend.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ if [ "$installFlinkOperator" = true ]; then
     --version "$flinkOperatorChartVersion" \
     --set serviceAccounts.flink.create=false \
     --set serviceAccounts.flink.name=cloudflow-app-serviceaccount \
-    lightbend-helm-charts/flink-operator)
+    https://github.com/lightbend/flink-operator/releases/download/v${flinkOperatorChartVersion}/flink-operator-${flinkOperatorChartVersion}.tgz)
 
     if [ $? -ne 0 ]; then 
         print_error_message "$result"
